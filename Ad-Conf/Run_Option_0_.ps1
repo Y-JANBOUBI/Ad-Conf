@@ -160,7 +160,7 @@ $Description = $null  # Optional: Example: "Main Office Scope"
 # =========================== DNS =============================
 
 # 1) Creates a primary reverse DNS zone
-$NetworkID = "192.168.2"  # Example: "192.168.2"
+$NetworkID = "192.168.2"  # Example: "192.168.2.0/24"
 
 #endregion
 
@@ -895,6 +895,7 @@ function check {
 
 check 
 Run-AutoConfig -TaskNumber $TaskNumber -Path $PSScriptRoot -ScriptPath $ScriptPath
+
 
 
 

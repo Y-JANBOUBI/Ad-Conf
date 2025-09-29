@@ -419,9 +419,9 @@ function Check-Config {
 
 #region 1) Check primary reverse DNS zone
     if ($null -eq $NetworkID) {
-        $errors += "NetworkID is not set. Please specify a valid network ID (e.g., '192.168.2')."
-    } elseif ($NetworkID -notmatch "^\d{1,3}\.\d{1,3}\.\d{1,3}$") {
-        $errors += "NetworkID '$NetworkID' is invalid. Please specify a valid network ID (e.g., '192.168.2')."
+        $errors += "NetworkID is not set. Please specify a valid network ID (e.g., '192.168.2.0/24')."
+    } elseif ($NetworkID -notmatch "^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/\d{1,2}$") {
+        $errors += "NetworkID '$NetworkID' is invalid. Please specify a valid network ID (e.g., '192.168.2.0/24')."
     }
 #endregion
 
@@ -895,6 +895,7 @@ function check {
 
 check 
 Run-AutoConfig -TaskNumber $TaskNumber -Path $PSScriptRoot -ScriptPath $ScriptPath
+
 
 
 

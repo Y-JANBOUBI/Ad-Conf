@@ -938,7 +938,7 @@ function Main {
                                         "2" {
                                             try {
                                                 if (-not $script:NetworkID) {
-                                                    $script:NetworkID = Read-Host "[+] Enter network ID for reverse zone (e.g., 192.168.2) "
+                                                    $script:NetworkID = Read-Host "[+] Enter network ID for reverse zone (e.g., 192.168.2.0/24) "
                                                 }
                                                 Add-DnsPrimaryReverseZone -NetworkID $script:NetworkID -ErrorAction Stop -Verbose
                                                 Write-Host "[+] Primary reverse DNS zone for $($script:NetworkID) created" -ForegroundColor Green -BackgroundColor Black
@@ -1184,6 +1184,7 @@ function Main {
 
 # Start the main execution
 Main
+
 
 
 

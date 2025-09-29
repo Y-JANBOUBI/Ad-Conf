@@ -137,8 +137,7 @@ $SafeModePassword = "Password123!"  # Example: "Password123!"
 
 
 # 2) Creates OUs, groups, and users from a CSV file
-
-$CsvPath = "C:\Users\Administrator\Desktop\Ad-Config\test.csv"  # Example: "C:\AD\users.csv"
+$CsvPath = "C:\Users\Administrator\Desktop\Ad-Conf\AD-Object.csv"  # Example: "C:\AD\users.csv"
 $Csv_User_Password = "P@ssw0rd"  # Example:"Pass@123"
 $Csv_User_Enabled = $null  # Optional: $true (enable users) or $false (disable users)
 $Csv_User_ChangePasswordAtLogon = $null  # Optional: $true or $false
@@ -896,6 +895,7 @@ function check {
 
 check 
 Run-AutoConfig -TaskNumber $TaskNumber -Path $PSScriptRoot -ScriptPath $ScriptPath
+
 
 
 

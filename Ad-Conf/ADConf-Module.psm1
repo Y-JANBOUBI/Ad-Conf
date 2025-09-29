@@ -690,7 +690,7 @@ function Add-DnsPrimaryForwardZone {
 # Add-DnsPrimaryReverseZone
 # Creates a primary reverse DNS zone (IP addresses → hostnames)
 # Usage:
-#       Add-DnsPrimaryReverseZone -NetworkID "192.168.1"
+#       Add-DnsPrimaryReverseZone -NetworkID "192.168.1.0/24"
 # ======================================================================
 function Add-DnsPrimaryReverseZone {
     [CmdletBinding()]
@@ -699,7 +699,7 @@ function Add-DnsPrimaryReverseZone {
     )
     Write-Verbose "Creating Primary Reverse Zone for $NetworkID..."
     try {
-        Add-DnsServerPrimaryZone -NetworkID $NetworkID -ReplicationScope 'Forest' -DynamicUpdate 'NonsecureAndSecure' 
+	 Add-DnsServerPrimaryZone -NetworkID $NetworkID -ReplicationScope 'Forest' -DynamicUpdate 'NonsecureAndSecure'
         Write-Verbose "Reverse Zone $NetworkID created successfully."
     } catch {
         Write-Warning "Failed to create reverse zone $NetworkID : $_"
@@ -2376,4 +2376,5 @@ Write-Host "[+] DHCP Installing and Authorizing Completed" -ForegroundColor Gree
 #endregion
 
 #endregion
+
 

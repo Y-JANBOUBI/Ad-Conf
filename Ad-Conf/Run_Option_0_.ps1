@@ -591,13 +591,9 @@ function Task-8-Update-WindowsSystem {
         
         $NextTask = $global:CurrentTaskNumber + 1
         Set-Content -Path $global:FlagPath -Value $NextTask -ErrorAction Stop
-        Update-WindowsSystem -Verbose 
-
         Write-Log "Task 8 completed, reboot required" -Level "SUCCESS"
         Write-Log "Rebooting to continue with Task $NextTask..." -Level "INFO"
-
-        Start-Sleep -Seconds 2
-        Restart-Computer -Force
+        Update-WindowsSystem -Verbose 
         return $true
 
     } catch {
@@ -895,6 +891,7 @@ function check {
 
 check 
 Run-AutoConfig -TaskNumber $TaskNumber -Path $PSScriptRoot -ScriptPath $ScriptPath
+
 
 
 

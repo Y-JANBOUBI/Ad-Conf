@@ -695,11 +695,9 @@ function Main {
                                         "7" {
                                             try {
                                                 Test-SystemReadiness -ErrorAction Stop
+                                                Write-Host "[+] Starting Windows updates" -ForegroundColor Green -BackgroundColor Black
                                                 Update-WindowsSystem -ErrorAction Stop -Verbose
-                                                Write-Host "[+] Windows updates installed" -ForegroundColor Green -BackgroundColor Black
-                                                Write-Host "Rebooting to apply changes..." -ForegroundColor Green -BackgroundColor Black
-                                                Start-Sleep -Seconds 5
-                                                Restart-Computer -Force 
+                                              
                                             }
                                             catch {
                                                 $operationErrors += "Failed to update system: $($_.Exception.Message)"
@@ -1184,6 +1182,7 @@ function Main {
 
 # Start the main execution
 Main
+
 
 
 

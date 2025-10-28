@@ -556,16 +556,27 @@ function Update-WindowsSystem {
     Write-Verbose "Checking for updates ..."
     try {
         # Install and Import PSWindowsUpdate Module 
-        Set-ExecutionPolicy RemoteSigned -Scope Process -Force
+       if ((Get-ExecutionPolicy) -eq 'Restricted') {
+            Set-ExecutionPolicy RemoteSigned -Scope Process -Force -Verbose:$false
+        }
 
-        if (-not (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
-            Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force }
+        try {
+               
+            $name =(Get-PackageProvider -ListAvailable).Name
+            if ('NuGet' -notin $name) {
+                Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force -Verbose:$false -ErrorAction Stop
+            }
+        } catch {
+            Write-Verbose "Failed to install NuGet provider: $($_.Exception.Message)"
+        }
 
+
+           
         if ((Get-PSRepository -Name "PSGallery").InstallationPolicy -ne "Trusted") {
-            Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted }
+            Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted -Verbose:$false }
 
         if (-not (Get-Module -ListAvailable -Name PSWindowsUpdate)) {
-            Install-Module -Name PSWindowsUpdate -Force  }
+            Install-Module -Name PSWindowsUpdate -Force -Verbose:$false }
 
         # Import module quietly (suppress verbose stream)
         Import-Module PSWindowsUpdate -Force -Verbose:$false
@@ -581,7 +592,13 @@ function Update-WindowsSystem {
 
         # Install updates (quiet mode, but still shows progress)
         Write-Verbose "Installing updates..."
-        Install-WindowsUpdate -AcceptAll -AutoReboot -Verbose
+        Install-WindowsUpdate -AcceptAll -AutoReboot:$false -Verbose:$false
+
+        Write-Verbose "Updates installed successfully. Rebooting system..."
+
+        Start-Sleep -Seconds 5
+        Restart-Computer -Force
+
 
     } catch {
         Write-Warning "Update failed: $($_.Exception.Message)"
@@ -2376,5 +2393,6 @@ Write-Host "[+] DHCP Installing and Authorizing Completed" -ForegroundColor Gree
 #endregion
 
 #endregion
+
 
 

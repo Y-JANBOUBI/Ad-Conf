@@ -40,6 +40,9 @@
 # Clone the AD-CONF repository
 git clone https://github.com/Y-JANBOUBI/Ad-Conf
 
+# Clone for Windows 
+ curl "https://github.com/Y-JANBOUBI/Ad-Conf/archive/refs/heads/main.zip" -o "Ad-Conf.zip" ; Expand-Archive -Path "Ad-Conf.zip" -DestinationPath "." -Force
+
 # Navigate into the project directory
 cd Ad-Conf
 

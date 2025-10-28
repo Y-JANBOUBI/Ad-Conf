@@ -108,7 +108,7 @@ $script:Random_User_ChangePasswordAtLogon = $null  # Optional: $true or $false
 
 # 2.3) Creates OUs, groups, and users from a CSV file
 # Function: Import-CsvADUser
-$script:CsvPath = "C:\Users\Administrator\Desktop\0Ad-Config\test.csv"  # Example: "C:\AD\users.csv"
+$script:CsvPath = $null  # Example: "C:\AD\users.csv"
 $script:Csv_User_Password = ConvertTo-SecureString "Pass@123" -AsPlainText -Force  # Example: ConvertTo-SecureString "Pass@123" -AsPlainText -Force
 $script:Csv_User_Enabled = $null  # Optional: $true (enable users) or $false (disable users)
 $script:Csv_User_ChangePasswordAtLogon = $null  # Optional: $true or $false
@@ -1184,6 +1184,7 @@ function Main {
 
 # Start the main execution
 Main
+
 
 
 
